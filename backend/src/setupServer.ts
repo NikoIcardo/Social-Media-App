@@ -49,7 +49,7 @@ export class Server {
         keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 3600000, // 7 days
         secure: config.NODE_ENV !== "development",
-      })
+      }),
     );
     app.use(hpp());
     app.use(helmet());
@@ -59,7 +59,7 @@ export class Server {
         credentials: true,
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      })
+      }),
     );
   }
 
@@ -85,14 +85,14 @@ export class Server {
         error: IErrorResponse,
         req: Request,
         res: Response,
-        next: NextFunction
+        next: NextFunction,
       ) => {
         log.error(error);
         if (error instanceof CustomError) {
           return res.status(error.statusCode).json(error.serializeErrors());
         }
         next();
-      }
+      },
     );
   }
 
