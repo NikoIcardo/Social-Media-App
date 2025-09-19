@@ -23,7 +23,7 @@ export default [
       ],
       camelcase: 0,
       "no-return-assign": 0,
-      quotes: ["error", "single"],
+      quotes: ["error", "double"],
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",

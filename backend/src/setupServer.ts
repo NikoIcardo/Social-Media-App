@@ -19,12 +19,9 @@ import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
 import Logger from "bunyan";
 
-import { config } from "./config";
-import applicationRoutes from "./routes";
-import {
-  CustomError,
-  IErrorResponse,
-} from "./shared/globals/helpers/errorHandler";
+import { config } from "@root/config";
+import applicationRoutes from "@root/routes";
+import { CustomError, IErrorResponse } from "@global/helpers/errorHandler";
 
 const log: Logger = config.createLogger("server");
 
@@ -131,5 +128,7 @@ export class Server {
     });
   }
 
-  private socketIOConnections(io: IoServer): void {}
+  private socketIOConnections(io: IoServer): void {
+    log.info("socketIOConnections");
+  }
 }
