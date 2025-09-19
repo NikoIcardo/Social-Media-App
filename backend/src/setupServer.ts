@@ -17,6 +17,7 @@ import "express-async-errors";
 import { Server as IoServer } from "socket.io";
 import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
+import Logger from "bunyan";
 
 import { config } from "./config";
 import applicationRoutes from "./routes";
@@ -25,7 +26,7 @@ import {
   IErrorResponse,
 } from "./shared/globals/helpers/errorHandler";
 
-const SERVER_PORT = 5000;
+const log: Logger = config.createLogger("server");
 
 export class Server {
   private app: Application;
@@ -86,7 +87,7 @@ export class Server {
         res: Response,
         next: NextFunction
       ) => {
-        console.log(error);
+        log.error(error);
         if (error instanceof CustomError) {
           return res.status(error.statusCode).json(error.serializeErrors());
         }
@@ -102,7 +103,7 @@ export class Server {
       this.startHttpServer(httpServer);
       this.socketIOConnections(socketIO);
     } catch (error) {
-      console.log(error);
+      log.error(error);
     }
   }
 
@@ -124,9 +125,9 @@ export class Server {
   }
 
   private startHttpServer(httpServer: http.Server): void {
-    console.log(`Server has started with process ${process.pid}`);
-    httpServer.listen(SERVER_PORT, () => {
-      console.log(`Server running on port: ${SERVER_PORT}`);
+    log.info(`Server has started with process ${process.pid}`);
+    httpServer.listen(config.SERVER_PORT, () => {
+      log.info(`Server running on port: ${config.SERVER_PORT}`);
     });
   }
 
