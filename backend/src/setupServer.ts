@@ -19,6 +19,7 @@ import { createClient } from "redis";
 import { createAdapter } from "@socket.io/redis-adapter";
 
 import { config } from "./config";
+import applicationRoutes from "./routes";
 
 const SERVER_PORT = 5000;
 
@@ -63,7 +64,9 @@ export class Server {
     app.use(urlencoded({ extended: true, limit: "50mb" }));
   }
 
-  private routMiddleware(app: Application): void {}
+  private routMiddleware(app: Application): void {
+    applicationRoutes(app);
+  }
 
   private globalErrorHandler(app: Application): void {}
 
