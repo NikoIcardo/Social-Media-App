@@ -10,6 +10,7 @@ class Config {
   public SECRET_KEY_TWO: string | undefined;
   public CLIENT_URL: string | undefined;
   public SERVER_PORT: string | undefined;
+  public REDIS_HOST: string | undefined;
 
   private readonly DEFAULT_DATABASE_URL =
     "mongodb://localhost:27017/social-media-app-backend";
@@ -22,6 +23,7 @@ class Config {
     this.SECRET_KEY_TWO = process.env.DATABASE_URL || "";
     this.CLIENT_URL = process.env.DATABASE_URL || "";
     this.SERVER_PORT = process.env.SERVER_PORT || "";
+    this.REDIS_HOST = process.env.REDIS_HOST || "";
   }
 
   public validateConfig(): void {
