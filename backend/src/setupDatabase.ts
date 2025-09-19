@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
+import { config } from "./config";
 
 export default () => {
   const connect = async () => {
     try {
-      await mongoose.connect(
-        "mongodb://localhost:27017/social-media-app-backend"
-      );
+      await mongoose.connect(config.DATABASE_URL!);
       console.log("Successfully connected to database");
     } catch (error) {
       console.log("Error connecting to database", error);
