@@ -84,8 +84,8 @@ export class Server {
         res: Response,
         next: NextFunction,
       ) => {
-        log.error(error);
         if (error instanceof CustomError) {
+          log.error(error);
           return res.status(error.statusCode).json(error.serializeErrors());
         }
         next();
